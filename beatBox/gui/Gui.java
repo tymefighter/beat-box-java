@@ -26,7 +26,7 @@ public class Gui {
 
     Container contentPane = frame.getContentPane();
 
-    buttonsPanel = new ButtonsPanel();
+    buttonsPanel = new ButtonsPanel(frame);
     contentPane.add(
       BorderLayout.EAST, 
       buttonsPanel
@@ -54,5 +54,9 @@ public class Gui {
 
   public InstrumentState[] getInstrumentStates() {
     return instrumentGridInput.getInstrumentStates();
+  }
+
+  public void setInstrumentStates(InstrumentState[] instrumentStates) {
+    instrumentGridInput.setInstrumentStates(instrumentStates);
   }
 }

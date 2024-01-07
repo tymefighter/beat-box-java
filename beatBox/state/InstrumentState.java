@@ -1,6 +1,10 @@
 package beatBox.state;
 
-public class InstrumentState {
+import java.io.Serializable;
+
+public class InstrumentState implements Serializable {
+  private static final long serialVersionUID = -2356169535651396583L;
+
   private int instrumentKey;
   private int[] beats;
 

@@ -1,5 +1,6 @@
 package beatBox.gui;
 
+import javax.swing.JFrame;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
@@ -7,7 +8,16 @@ import javax.swing.BoxLayout;
 import java.util.ArrayList;
 
 class ButtonsPanel extends Box {
+  private JFrame frame;
+
   private ArrayList<Button> buttons;
+
+  private void addButton(
+    Button button
+  ) {
+    add(button);
+    buttons.add(button);
+  }
 
   private void addButton(
     ButtonEventType buttonEventType,
@@ -18,12 +28,13 @@ class ButtonsPanel extends Box {
       label
     );
 
-    add(button);
-    buttons.add(button);
+    addButton(button);
   }
 
-  public ButtonsPanel() {
+  public ButtonsPanel(JFrame frame) {
     super(BoxLayout.Y_AXIS);
+
+    this.frame = frame;
 
     buttons = new ArrayList<Button>();
 
@@ -45,6 +56,22 @@ class ButtonsPanel extends Box {
     addButton(
       ButtonEventType.TEMPO_DOWN,
       "Tempo Down"
+    );
+
+    addButton(
+      new FileButton(
+        frame,
+        ButtonEventType.SAVE,
+        "Save"
+      )
+    );
+
+    addButton(
+      new FileButton(
+        frame,
+        ButtonEventType.RESTORE,
+        "Restore"
+      )
     );
   }
 
