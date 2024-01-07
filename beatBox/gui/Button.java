@@ -8,9 +8,9 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 class Button extends JButton implements ActionListener {
-  private ButtonEventType type;
+  protected ButtonEventType type;
 
-  private ArrayList<ButtonEventListener> buttonEventListeners;
+  protected ArrayList<ButtonEventListener> buttonEventListeners;
 
   public Button(ButtonEventType type, String label) {
     super(label);

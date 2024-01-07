@@ -37,7 +37,7 @@ class InstrumentGridInput extends JPanel {
     }
   }
 
-  InstrumentState[] getInstrumentStates() {
+  public InstrumentState[] getInstrumentStates() {
     Instrument[] instruments = Instruments.getInstruments();
 
     ArrayList<InstrumentState> instrumentStates = new ArrayList<InstrumentState>();
@@ -66,5 +66,37 @@ class InstrumentGridInput extends JPanel {
     }
 
     return instrumentStates.toArray(new InstrumentState[0]);
+  }
+
+  public void setInstrumentStates(InstrumentState[] instrumentStates) {
+    Instrument[] instruments = Instruments.getInstruments();
+
+    boolean[] checkBoxStates = new boolean[checkBoxes.length];
+
+    for(InstrumentState instrumentState : instrumentStates) {
+      int instrumentKey = instrumentState.getInstrumentKey();
+      int[] beats = instrumentState.getBeats();
+
+      int instrumentIndex = 0;
+      while(
+        instrumentIndex < instruments.length
+        && instruments[instrumentIndex].getKey() != instrumentKey
+      ) {
+        instrumentIndex ++;
+      }
+
+      if(instrumentIndex == instruments.length) {
+        continue;
+      }
+
+      for(int beat : beats) {
+        int checkBoxIndex = instrumentIndex * COLS + beat;
+        checkBoxStates[checkBoxIndex] = true;
+      }
+    }
+
+    for(int index = 0; index < checkBoxes.length; index ++) {
+      checkBoxes[index].setSelected(checkBoxStates[index]);
+    }
   }
 }
